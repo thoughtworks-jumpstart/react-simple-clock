@@ -4,11 +4,11 @@
 
 ## Objectives
 
-In this exercise you will learn that
+In this exercise you will learn
 
-- React elements are immutable
-- Update elements by using `setInterval()`
-- ReactDOM only updates what has changed
+- that React elements are immutable
+- to update elements by using `setInterval()`
+- that ReactDOM only updates what has changed
 
 ## Instructions
 
