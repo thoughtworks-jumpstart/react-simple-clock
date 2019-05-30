@@ -2,6 +2,13 @@
 
 🕰 A simple clock in React
 
+## Objectives
+
+In this exercise you will learn that
+
+- React elements are immutable
+- Update elements by using `setInterval()`
+
 ## Instructions
 
 In the [previous exercise](https://github.com/thoughtworks-jumpstart/react-hello-world) we learned how to create React elements and to render them to the DOM.
