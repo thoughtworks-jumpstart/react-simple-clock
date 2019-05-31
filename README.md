@@ -47,8 +47,47 @@ This is why we had to re-create the `Clock` element and pass it the date each ti
 
 In React, `state` allows React componenets to change their output in response to user actions, network calls, or anything else.
 
+## Using `state` correctly
+
+Do not modify state directly
+
+```js
+// Wrong
+this.state.name = "Bob";
+
+// Correct
+this.setState({ name: "Bob" });
+```
+
+For performance reasons, React may batch multiple `setState()` calls into a single update.
+
+Because `props` and `state` may be updated asynchronously, you should not rely on their values for calculating the next `state`.
+
+Instead of passing `setState()` an object, we can pass it a function that will receive the previous `state` and previous `props` as arguments.
+
+```js
+// Wrong
+this.setState({
+  counter: this.state.counter + this.props.increment
+});
+
+// Correct
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+```
+
+## Differences between `state` and `props`
+
+`props` (short for “properties”) and `state` are both plain JavaScript objects.
+
+`props` get passed to the component (similar to function parameters) whereas `state` is managed within the component (similar to variables declared within a function).
+
+`props` are read-only and components must not modify them. `state` can be modified using `setState()`.
+
 ## References
 
 - [Updating the rendered element](https://reactjs.org/docs/rendering-elements.html#updating-the-rendered-element)
 - [window.setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval)
 - [React only updates what is necessary](https://reactjs.org/docs/rendering-elements.html#react-only-updates-whats-necessary)
+- [Use `state` correctly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly)
