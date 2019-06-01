@@ -43,7 +43,7 @@ React has one strict rule: React components must **never** modify its own props.
 
 This is why we had to re-create the `Clock` element and pass it the current time each time we wanted to change its value.
 
-## State and lifecycle
+## Components can change their state
 
 In React, `state` allows React componenets to change their output in response to user actions, network calls, or anything else.
 
@@ -65,11 +65,23 @@ Next, we want to change `this.props.time` to `this.state.time` in our `render()`
 
 Looks like everything is in order, but we still have one more problem to solve. How do we get the component to update itself every second?
 
+## Lifecylce methods
+
 That's where lifecyle methods come into play.
 
 Refer to this [diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) to visualize the lifecycle of a React component.
 
-The common lifecycle methods are [`componentDidMount()`](https://reactjs.org/docs/react-component.html#componentdidmount), [`componentDidUpdate()`](https://reactjs.org/docs/react-component.html#componentdidupdate), and [`componentWillUnmount()`](https://reactjs.org/docs/react-component.html#componentwillunmount).
+Let's look at the most common lifecycle methods and their uses:
+
+[`componentDidMount()`](https://reactjs.org/docs/react-component.html#componentdidmount) - invoked immediately after a component is mounted.
+
+[`componentDidUpdate()`](https://reactjs.org/docs/react-component.html#componentdidupdate) - invoked immediately after updating occurs.
+
+[`componentWillUnmount()`](https://reactjs.org/docs/react-component.html#componentwillunmount) - invoked immediately before a component is unmounted and destroyed.
+
+For our use case, we can use `componentDidMount()` to update our `state` with the current time using `setInterval()`.
+
+Since `setInterval()` creates a new timer, this means that we have to also remove the timer after it is unmounted. We can do this with `clearInterval()` in the `componentWillUnmount()`.
 
 ## Using `state` correctly
 
@@ -106,6 +118,14 @@ this.setState((state, props) => ({
   counter: state.counter + props.increment
 }));
 ```
+
+### React merges the object into the current state
+
+When we call `setState()`, React merges the object into the current state.
+
+This means you can update state independently with separate `setState()` calls.
+
+For example, if you have `this.state.posts` and `this.state.comments`, doing `setState({ comments })` will replace `this.state.comments`, but keep `this.state.posts` intact.
 
 ## Differences between `state` and `props`
 
