@@ -27,7 +27,7 @@ Let's look at our current implementation:
 
 We defined a function component called `Clock` which returns the React element for the clock app.
 
-We defined a function called `tick` which gets the current date and time and passes it to `Clock` as an attribute and then renders it to the DOM.
+We defined a function called `tick` which gets the current time and passes it to `Clock` as an attribute and then renders it to the DOM.
 
 Lastly, we use `setInterval()` to call `tick` every one second.
 
@@ -41,15 +41,43 @@ This is because ReactDOM compares the element and its children to the previous o
 
 React has one strict rule: React components must **never** modify its own props.
 
-This is why we had to re-create the `Clock` element and pass it the date each time we wanted to change its value.
+This is why we had to re-create the `Clock` element and pass it the current time each time we wanted to change its value.
 
 ## State and lifecycle
 
 In React, `state` allows React componenets to change their output in response to user actions, network calls, or anything else.
 
+Currently, we initialize our `Clock` component like this `<Clock time={time} />` to pass in the time as `props`. This is because time keeps changing and since `props` cannot be mutated by the component itself we have to pass in the new time from outside.
+
+In order for the component to update time on its own, we have to use `state` instead.
+
+First, let's convert our function component to a class component. Add a constructor method and don't forget to call `super(props)`. In the constructor, you should also assign the initial value of `this.state`.
+
+```js
+constructor(props) {
+    super(props)
+    const time = (new Date()).toLocaleTimeString()
+    this.state = { time }
+  }
+```
+
+Next, we want to change `this.props.time` to `this.state.time` in our `render()` method.
+
+Looks like everything is in order, but we still have one more problem to solve. How do we get the component to update itself every second?
+
+That's where lifecyle methods come into play.
+
+Refer to this [diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/) to visualize the lifecycle of a React component.
+
+The common lifecycle methods are [`componentDidMount()`](https://reactjs.org/docs/react-component.html#componentdidmount), [`componentDidUpdate()`](https://reactjs.org/docs/react-component.html#componentdidupdate), and [`componentWillUnmount()`](https://reactjs.org/docs/react-component.html#componentwillunmount).
+
 ## Using `state` correctly
 
-Do not modify state directly
+Here are three things to keep in mind when managing `state`.
+
+### Use `setState()` to set `state`
+
+Do not modify state directly, instead you should use `setState()` to update `state`
 
 ```js
 // Wrong
@@ -58,6 +86,8 @@ this.state.name = "Bob";
 // Correct
 this.setState({ name: "Bob" });
 ```
+
+### React updates `state` asynchronously
 
 For performance reasons, React may batch multiple `setState()` calls into a single update.
 
