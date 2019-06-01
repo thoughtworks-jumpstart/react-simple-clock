@@ -73,11 +73,9 @@ Refer to this [diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-dia
 
 Let's look at the most common lifecycle methods and their uses:
 
-[`componentDidMount()`](https://reactjs.org/docs/react-component.html#componentdidmount) - invoked immediately after a component is mounted.
-
-[`componentDidUpdate()`](https://reactjs.org/docs/react-component.html#componentdidupdate) - invoked immediately after updating occurs.
-
-[`componentWillUnmount()`](https://reactjs.org/docs/react-component.html#componentwillunmount) - invoked immediately before a component is unmounted and destroyed.
+- [`componentDidMount()`](https://reactjs.org/docs/react-component.html#componentdidmount) - invoked immediately after a component is mounted.
+- [`componentDidUpdate()`](https://reactjs.org/docs/react-component.html#componentdidupdate) - invoked immediately after updating occurs.
+- [`componentWillUnmount()`](https://reactjs.org/docs/react-component.html#componentwillunmount) - invoked immediately before a component is unmounted and destroyed.
 
 For our use case, we can use `componentDidMount()` to update our `state` with the current time using `setInterval()`.
 
@@ -87,7 +85,7 @@ Since `setInterval()` creates a new timer, this means that we have to also remov
 
 Here are three things to keep in mind when managing `state`.
 
-### Use `setState()` to set `state`
+### 1. Use `setState()` to set `state`
 
 Do not modify state directly, instead you should use `setState()` to update `state`
 
@@ -99,7 +97,7 @@ this.state.name = "Bob";
 this.setState({ name: "Bob" });
 ```
 
-### React updates `state` asynchronously
+### 2. React updates `state` asynchronously
 
 For performance reasons, React may batch multiple `setState()` calls into a single update.
 
@@ -119,7 +117,7 @@ this.setState((state, props) => ({
 }));
 ```
 
-### React merges the object into the current state
+### 3. React merges the object into the current state
 
 When we call `setState()`, React merges the object into the current state.
 
