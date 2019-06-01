@@ -1,3 +1,7 @@
+function Header(props) {
+  return <h1>{props.title}</h1>;
+}
+
 class Clock extends React.Component {
   constructor(props) {
     super(props);
@@ -17,19 +21,21 @@ class Clock extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <h1>What's the time now?</h1>
-        <h2>It is {this.state.time}</h2>
-      </div>
-    );
+    return <h2>It is {this.state.time}</h2>;
   }
 }
 
-function tick() {
-  const element = <Clock />;
-  const container = document.getElementById("app");
-  ReactDOM.render(element, container);
+function App() {
+  return (
+    <React.Fragment>
+      <Header title="What's the time now?" />
+      <Clock />
+    </React.Fragment>
+  );
 }
 
-setInterval(tick, 1000);
+const element = <App />;
+
+const container = document.getElementById("app");
+
+ReactDOM.render(element, container);
