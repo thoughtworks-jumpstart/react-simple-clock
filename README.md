@@ -19,7 +19,9 @@ One important thing to note is that React elements are [immutable objects](https
 
 If React elements are immutable, how can we build apps that require us to change its content?
 
-In this exercise, we will look at how to update these elements.
+We have used a naive approach to update our React component with the current time using `props` and used `setInterval()` to push the new props to the component.
+
+In this exercise, your task is to convert the function component to a class component and use `state` to update the time instead.
 
 ## The clock
 
