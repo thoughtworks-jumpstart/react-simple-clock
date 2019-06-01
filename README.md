@@ -4,10 +4,11 @@
 
 ## Objectives
 
-In this exercise you will learn that
+In this exercise you will learn
 
 - React elements are immutable
 - ReactDOM only updates what has changed
+- React DevTools to view `props` and `state` changes
 - React components cannot modify `props`
 - React components can modify `state` with `setState()`
 
@@ -38,6 +39,14 @@ Lastly, we use `setInterval()` to call `tick` every one second.
 Open your browser DevTools and observethat despite creating a React element with multiple HTML elements and rendering on every tick, only the content that has changed gets updated by ReactDOM.
 
 This is because ReactDOM compares the element and its children to the previous one, and only applies the DOM updates necessary to bring the DOM to the desired state.
+
+## React DevTools
+
+Download the [React DevTools](https://github.com/facebook/react-devtools) for either Chrome or Firefox.
+
+Open React DevTools in your browser DevTools, go to settings and turn on `Highlight Updates` if it is not already checked.
+
+You will see a blue border flashing. This is the component that is currently being updated. You will also notice a side panel, this is used to display the contents of `props` and `state` (if any).
 
 ## Props are read-only
 
