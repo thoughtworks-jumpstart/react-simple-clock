@@ -9,7 +9,7 @@ In this exercise you will learn that
 - React elements are immutable
 - ReactDOM only updates what has changed
 - React components cannot modify `props`
-- React components can modify `state`
+- React components can modify `state` with `setState()`
 
 ## Instructions
 
