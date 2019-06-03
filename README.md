@@ -24,6 +24,8 @@ We have used a naive approach to update our React component with the current tim
 
 In this exercise, your task is to convert the function component to a class component and use `state` to update the time instead.
 
+Once you have done that you can look at splitting your app into multiple logical components and even use React.Fragment to avoid wrapping your components in a single
+
 ## The clock
 
 Let's look at our current implementation:
@@ -144,9 +146,50 @@ For example, if you have `this.state.posts` and `this.state.comments`, doing `se
 
 `props` are read-only and components must not modify them. `state` can be modified using `setState()`.
 
+## Composing components
+
+Components can be composed of other components.
+
+```js
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+function App() {
+  return (
+    <div>
+      <Welcome name="Alice" />
+      <Welcome name="Bob" />
+      <Welcome name="Charlie" />
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+```
+
+## React.Fragment
+
+By default, components can only return one element. This means we often have to use `<div>` tags to wrap our components. Many React apps have unnecessary `<div>` tags because of this limitation.
+
+To get around this we can use the `React.Fragment` component to return multiple elements in a `render()` method without creating an additional DOM element.
+
+```js
+render() {
+  return (
+    <React.Fragment>
+      <h1>This is a heading</h1>
+      <p>Some content here</p>
+      <p>Some more content here</p>
+    </React.Fragment>
+  );
+}
+```
+
 ## References
 
 - [Updating the rendered element](https://reactjs.org/docs/rendering-elements.html#updating-the-rendered-element)
-- [window.setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval)
 - [React only updates what is necessary](https://reactjs.org/docs/rendering-elements.html#react-only-updates-whats-necessary)
 - [Use `state` correctly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly)
+- [window.setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval)
+- [window.clearInterval()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearInterval)
